@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   searchStr: string = '';
+  addNewStory: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
@@ -14,5 +15,12 @@ export class HomeComponent implements OnInit {
   getString($event: string) {
     this.searchStr = $event
   }
+  setAddNewStory() {
+    this.addNewStory = true
+  }
+  closeAddNewStory() {
+    this.addNewStory = false
+  }
+
 
 }

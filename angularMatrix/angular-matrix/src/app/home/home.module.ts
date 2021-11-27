@@ -6,11 +6,12 @@ import {StoriesListComponent} from "../components/home-components/stories-list/s
 import {SearchComponent} from "../components/home-components/search/search.component";
 import {AddComponent} from "../components/home-components/add/add.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AddStoryModalComponent} from "../components/home-components/add-story-modal/add-story-modal.component";
 
 
 
 @NgModule({
-  declarations: [HomeComponent, StoriesListComponent, StoryComponent, SearchComponent, AddComponent],
+  declarations: [HomeComponent, StoriesListComponent, StoryComponent, SearchComponent, AddComponent, AddStoryModalComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

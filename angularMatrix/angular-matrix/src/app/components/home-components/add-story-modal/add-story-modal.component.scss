@@ -1,0 +1,104 @@
+@use "/src/variables";
+
+@keyframes  addStoryModalAni {
+  from {
+    top: -50%;
+  }
+  to {
+    top: 20%;
+  }
+}
+.addStoryModal {
+  position: fixed;
+  top: 20%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: #fff;
+  display: block;
+  width: 80vw;
+  border-radius: 10px;
+  max-width: 700px;
+  box-shadow: 0 0 3px 3px grey;
+  padding: 20px 20px 40px 20px;
+  text-align: center;
+  animation: addStoryModalAni 1s ease-in-out;
+}
+#image {
+  display: none;
+}
+
+.imageLabel {
+  width: 220px;
+  padding: 3px 10px;
+  transform: translateY(10px);
+  border-radius: 15px;
+  background: variables.$defaultGradient;
+  animation: 1s addBrnAni ease-in-out infinite;
+  animation-direction: alternate;
+  margin: 0 auto auto 0;
+  label {
+    width: 100%;
+    display: block;
+    padding: 5px;
+    font-size: variables.$defaultFontSize;
+    font-weight: variables.$defaultFontWeight;
+    color: #000;
+    transition: all 700ms ease-out;
+    cursor: pointer;
+  }
+  &:hover {
+    background:linear-gradient(180deg, #3a32c6 11%, #3737c2 21%, #00d4ff 100%) ;
+    label {
+      color: #fff;
+    }
+  }
+}
+.contentTextbox, .titleInput {
+  label {
+    font-size: variables.$defaultFontSize;
+    font-weight: variables.$defaultFontWeight;
+    color: #000;
+    margin: 10px auto;
+  }
+  input {
+    font-size: variables.$defaultFontSize;
+  }
+}
+.contentTextbox {
+  textarea {
+    border-radius: 10px;
+    padding: 5px;
+    font-size: variables.$defaultFontSize;
+    color: #000;
+    min-height: 100px;
+    overflow: scroll;
+  }
+}
+
+.closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  font-size: variables.$defaultFontSize;
+  background: variables.$defaultGradient;
+  background-color: inherit;
+  border: 2px solid grey;
+  border-radius: 10px;
+  line-height: 20px;
+  padding: 1px 8px 4px 8px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+  }
+}
+.errorModalMess {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  font-size: 10px;
+  color: red
+}

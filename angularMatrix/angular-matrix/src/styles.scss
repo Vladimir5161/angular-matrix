@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use "/src/variables";
 .header {
   width: 100%;
 }
@@ -9,4 +10,40 @@
 }
 * {
   box-sizing: border-box;
+}
+
+
+@keyframes addBrnAni {
+  from     { background: #00caf8;}
+  to {     background: #073a9a ;}
+}
+.add-btn {
+  font-size: 20px;
+  font-weight: 500;
+  width: 140px;
+  padding: 5px;
+  border-radius: 15px;
+  background: variables.$defaultGradient;
+  transition: all 700ms ease-out;
+  animation: 1s addBrnAni ease-in-out infinite;
+  animation-direction: alternate;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(180deg, #3a32c6 11%, #3737c2 21%, #00d4ff 100%) ;
+  }
+}
+.ready {
+  animation: none !important;
+  color: #fff !important;
+  cursor: default !important;
+}
+.error {
+  input {
+    border-bottom: 2px solid red !important;
+    color: red;
+  }
+  textarea {
+    border-left: 5px solid red !important;
+  }
 }

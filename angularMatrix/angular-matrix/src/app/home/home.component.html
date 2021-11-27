@@ -1,7 +1,11 @@
 <div class="homeWrapper">
   <div class="homeHeader">
-    <app-search (stringEvent)="getString($event)"></app-search>
-    <app-add ></app-add>
+    <app-search (stringEvent)="getString($event)" ></app-search>
+    <app-add (setAddNewStory)="setAddNewStory()" [addNewStory]="addNewStory"></app-add>
   </div>
   <app-stories-list></app-stories-list>
+  <div *ngIf="addNewStory">
+    <app-add-story-modal (closeModalFunc)="closeAddNewStory()">
+    </app-add-story-modal>
+  </div>
 </div>
