@@ -4,7 +4,7 @@ nav {
   background: linear-gradient(90deg, rgba(2,0,36,1) 11%, rgba(9,9,121,1) 21%, rgba(0,212,255,1) 100%);
 }
 .toolbarWrapper {
-    padding: 5px 10px;
+    padding: 5px 20px;
     height: 100%;
     display: flex;
     line-height: initial;
@@ -12,10 +12,16 @@ nav {
     a {
       font-size: 22px;
       font-weight: 500;
+      transition: 1s;
+      &:hover {
+        background: inherit;
+        cursor: pointer;
+        color: #000;
+      }
     }
     .logo {
       border-radius: 60%;
-      background-color: #fff;
+      background-color: #fff !important;
     }
     img {
       border-radius: 50%;

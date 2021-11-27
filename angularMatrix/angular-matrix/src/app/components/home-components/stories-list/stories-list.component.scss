@@ -1,0 +1,9 @@
+.storiesWrapper {
+  width: 100%;
+  display: grid;
+  justify-content: space-around;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 465px));
+  grid-gap: 30px;
+  align-items: center;
+  margin: 25px 0;
+}

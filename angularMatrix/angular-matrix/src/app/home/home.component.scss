@@ -1,0 +1,19 @@
+.homeWrapper {
+  width: 100%;
+  max-width: 1270px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.homeHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 20px;
+  @media screen and (max-width: 767px) {
+    flex-direction: column;
+  }
+}
