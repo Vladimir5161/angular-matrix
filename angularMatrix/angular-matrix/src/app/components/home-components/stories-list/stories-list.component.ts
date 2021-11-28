@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from "moment";
+import {ApiService} from "../../../services/api.service";
+import {Post} from "../../../types/posts.types";
 
 interface Story {
   id: number,
@@ -37,10 +39,13 @@ const stories: Story[] = [
   styleUrls: ['./stories-list.component.scss']
 })
 export class StoriesListComponent implements OnInit {
-  stories: Story[] = stories;
-  constructor() { }
+  stories: Post[] = [];
+  constructor(private ApiService : ApiService) { }
 
   ngOnInit(): void {
+     this.ApiService.getPosts(10).subscribe(i => {
+       console.log(i)
+     })
   }
 
 }

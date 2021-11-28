@@ -5,7 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeModule} from "./home/home.module";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
-import {MomentPipe} from "./shared/moment.pipe";
+import {MomentPipe} from "./pipes/moment.pipe";
+import {HttpClientModule} from "@angular/common/http";
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,13 @@ import {MomentPipe} from "./shared/moment.pipe";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HomeModule
+    HomeModule,
+    HttpClientModule,
+    AuthModule,
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

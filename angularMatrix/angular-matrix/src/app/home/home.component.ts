@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   searchStr: string = '';
-  addNewStory: boolean = true;
+  addNewStory: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

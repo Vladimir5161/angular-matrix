@@ -14,8 +14,8 @@ import {AddStoryModalComponent} from "../components/home-components/add-story-mo
   declarations: [HomeComponent, StoriesListComponent, StoryComponent, SearchComponent, AddComponent, AddStoryModalComponent],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     HomeComponent,

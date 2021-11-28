@@ -1,0 +1,24 @@
+@use "/src/variables";
+
+.authForm {
+  max-width: 80vw;
+  width: 500px;
+  margin: 40px auto;
+}
+.emailInput, .passwordInput {
+  position: relative;
+  label {
+    font-size: variables.$defaultFontSize;
+    font-weight: variables.$defaultFontWeight;
+    color: #000;
+  }
+  input {
+    font-size: variables.$defaultFontSize;
+  }
+}
+.visibilityIcon {
+  position: absolute;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+}

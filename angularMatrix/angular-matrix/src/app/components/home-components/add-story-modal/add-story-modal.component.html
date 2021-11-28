@@ -1,14 +1,18 @@
 <div class="addStoryModal">
   <button class="closeModal" (click)="closeModal()">X</button>
   <div *ngIf="!storyGroup.valid">
-      <div class="errorModalMess">{{errorMsg}}</div>
+      <div class="errorMess">{{errorMsg}}</div>
   </div>
   <form [formGroup]="storyGroup">
-    <div class="titleInput" [ngClass]="{error: storyGroupControls.title.touched  && !!storyGroupControls.title.errors }" >
+    <div class="titleInput" [ngClass]="{
+      error: storyGroupControls.title.value && !storyGroupControls.title.touched  && !!storyGroupControls.title.errors
+    }" >
       <label for="title">Title </label>
       <input id="title" type="text" formControlName="title" (ngModelChange)="getErrorMessage()">
     </div>
-    <div class="contentTextbox" [ngClass]="{error: storyGroupControls.content.touched  && !!storyGroupControls.content.errors}" >
+    <div class="contentTextbox" [ngClass]="{
+      error: storyGroupControls.content.value && !storyGroupControls.content.touched  && !!storyGroupControls.content.errors
+    }" >
       <label for="content">Content </label>
       <textarea  id="content" type="text" formControlName="content" (ngModelChange)="getErrorMessage()"></textarea>
     </div>
