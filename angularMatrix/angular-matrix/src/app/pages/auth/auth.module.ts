@@ -4,6 +4,8 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthFormComponent} from "../../components/auth-components/auth-form/auth-form.component";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import {ResetPasswordFormComponent} from "../../components/auth-components/reset-password-form/reset-password-form.component";
 
 
 
@@ -11,7 +13,9 @@ import {AuthFormComponent} from "../../components/auth-components/auth-form/auth
   declarations: [
     RegisterComponent,
     LoginComponent,
-    AuthFormComponent
+    AuthFormComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent
   ],
     imports: [
         CommonModule,
