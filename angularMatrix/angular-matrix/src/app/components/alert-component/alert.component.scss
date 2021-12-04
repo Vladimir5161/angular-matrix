@@ -1,0 +1,46 @@
+@use "src/variables";
+
+@keyframes AlertAnim {
+  from {
+    transform: translateX(-1500px);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.alertWrapper, .closingAlertWrapper {
+    position: absolute;
+    padding: 10px;
+    width: 50vw;
+    margin: 10px auto;
+    display: flex;
+    left: 0;
+    right: 0;
+    top: 12%;
+    background-color: #fff;
+    z-index: 200;
+    border-radius: 10px;
+    align-items: center;
+    animation: 1s AlertAnim ease-in-out;
+
+    div {
+      font-size: variables.$secondaryFontSize;
+      font-weight: variables.$defaultFontWeight;
+      width: 90%;
+    }
+
+    button {
+      position: static;
+      top: auto;
+    }
+}
+.closingAlertWrapper {
+    animation: 1s AlertAnim reverse ease-in-out;
+}
+.alertSuccess {
+  box-shadow: 0 0 3px 3px green;
+}
+.alertError {
+  box-shadow: 0 0 3px 3px red;
+}

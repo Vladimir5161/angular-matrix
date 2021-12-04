@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from '../../../services/api.service'
 
 @Component({
   selector: 'app-login',
@@ -8,12 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
-  constructor() { }
+  constructor(private ApiService: ApiService) { }
 
   ngOnInit(): void {
   }
-  getFormValues(event: any) {
-    this.email =  event.email
-    this.password = event.password
+  submitFormValues(event: any) {
+    this.ApiService.login({email: event.email, password: event.password})
   }
 }

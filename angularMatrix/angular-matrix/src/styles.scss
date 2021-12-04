@@ -33,7 +33,7 @@
     background: linear-gradient(180deg, #3a32c6 11%, #3737c2 21%, #00d4ff 100%) ;
   }
 }
-.ready {
+.notReady {
   animation: none !important;
   color: #fff !important;
   cursor: default !important;
@@ -68,4 +68,21 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
+}
+.closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  font-size: variables.$defaultFontSize;
+  background: variables.$defaultGradient;
+  background-color: inherit;
+  border: 2px solid grey;
+  border-radius: 10px;
+  line-height: 20px;
+  padding: 1px 8px 4px 8px;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+  }
 }

@@ -1,0 +1,14 @@
+<div *ngIf="closing; then thenBlock else elseBlock"></div>
+  <ng-template #elseBlock>
+    <div class="alertWrapper" [ngClass]="error? 'alertError' : 'alertSuccess'" *ngIf="alertMessage">
+      <div>{{alertMessage}}</div>
+      <button class="closeModal" (click)="closeModal()">X</button>
+    </div>
+  </ng-template>
+  <ng-template #thenBlock>
+    <div class="closingAlertWrapper" [ngClass]="error? 'alertError' : 'alertSuccess'" *ngIf="alertMessage">
+      <div>{{alertMessage}}</div>
+      <button class="closeModal" (click)="closeModal()">X</button>
+    </div>
+  </ng-template>
+

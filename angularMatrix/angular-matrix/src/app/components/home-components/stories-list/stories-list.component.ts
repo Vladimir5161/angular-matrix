@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as moment from "moment";
 import {ApiService} from "../../../services/api.service";
 import {Post} from "../../../types/posts.types";
+import {HttpHeaders} from "@angular/common/http";
 
 interface Story {
   id: number,
@@ -43,9 +44,13 @@ export class StoriesListComponent implements OnInit {
   constructor(private ApiService : ApiService) { }
 
   ngOnInit(): void {
-     this.ApiService.getPosts(10).subscribe(i => {
-       console.log(i)
-     })
+    this.ApiService.getToken().subscribe(token => {
+      if(token) {
+        this.ApiService.getPosts(10).subscribe(resp => {
+          this.stories = resp.body || []
+        })
+      }
+    })
   }
 
 }

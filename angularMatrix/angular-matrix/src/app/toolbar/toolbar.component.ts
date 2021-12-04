@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../services/api.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
-
-  constructor() { }
+  token: string = '';
+  constructor(public ApiService: ApiService) { }
 
   ngOnInit(): void {
+    this.ApiService.getToken().subscribe(token => {
+      this.token = token;
+    })
   }
-
+  logout(event: any) {
+    event.preventDefault()
+    this.ApiService.logout();
+  }
 }

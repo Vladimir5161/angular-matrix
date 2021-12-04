@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {ApiService} from "../../../services/api.service";
+import {FormErrorService} from "../../../services/form-error.service";
 
 @Component({
   selector: 'app-add-story-modal',
@@ -14,10 +16,13 @@ export class AddStoryModalComponent implements OnInit {
     title: ['', Validators.compose([Validators.required, Validators.minLength(3)])],
     content: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
   });
-  errorMsg: string = ''
-  constructor(private fb: FormBuilder) { }
+  token: string = ''
+  constructor(private fb: FormBuilder, private apiService: ApiService, public formErrorService: FormErrorService) { }
 
   ngOnInit(): void {
+    this.apiService.getToken().subscribe(token => {
+      this.token = token
+    })
   }
   get storyGroupControls() {
     return this.storyGroup.controls;
@@ -37,15 +42,7 @@ export class AddStoryModalComponent implements OnInit {
     }
   }
   getErrorMessage() {
-    if(this.storyGroupControls.title && !this.storyGroupControls.title.touched && this.storyGroupControls.title.errors?.minlength) {
-      this.errorMsg = 'title length should be not less then 3'
-    } else if(this.storyGroupControls.title.touched && !this.storyGroupControls.title) {
-      this.errorMsg = 'title is required'
-    } else if(this.storyGroupControls.content.touched && !this.storyGroupControls.content) {
-      this.errorMsg = 'content is required'
-    } else if(this.storyGroupControls.content && !this.storyGroupControls.content.touched && this.storyGroupControls.content.errors?.minlength) {
-      this.errorMsg = 'content length should be not less then 3'
-    } else this.errorMsg = ''
+    this.formErrorService.showErrorMessage( this.storyGroup, false, !!this.token)
   }
   closeModal() {
     this.closeModalFunc.emit()
