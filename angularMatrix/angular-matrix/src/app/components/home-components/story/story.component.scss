@@ -15,7 +15,11 @@
     margin: 5px auto 10px 10px;
   }
   p {
-    padding: 5px;
+    padding: 0 5px 5px 5px;
+    height: 47px;
+    overflow: hidden;
+    margin: 0 0 5px 0;
+    word-break: break-word;
   }
   img {
     display: block;

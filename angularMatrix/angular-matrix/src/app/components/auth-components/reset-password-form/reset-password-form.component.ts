@@ -28,11 +28,14 @@ export class ResetPasswordFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.FormErrorService.clearError()
-    this.resetPasswordPage = window.location.href.includes('requestResetPassword');
-    this.resetPasswordGroup = this.fb.group({
+    this.resetPasswordPage = !window.location.href.includes('requestResetPassword');
+    this.resetPasswordGroup = this.resetPasswordPage ? this.fb.group({
       password: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(5)])}],
       repeatPassword: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.minLength(5)]), }],
     }, {validators: validatePasswordRepeat})
+      : this.fb.group({
+      email: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.email])}],
+    } )
   }
 
   onInputValueChange() {
@@ -46,8 +49,7 @@ export class ResetPasswordFormComponent implements OnInit {
     }
   }
   submitForm(event: any) {
-    event.preventDefault();
-    const data = this.resetPasswordPage ? this.email :
+    const data = !this.resetPasswordPage ? this.resetPasswordGroup.controls.email.value :
       {
         token: this.token,
         password: this.resetPasswordGroup.controls.password.value,

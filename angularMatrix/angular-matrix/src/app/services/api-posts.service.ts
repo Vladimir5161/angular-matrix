@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, Subject, Subscription} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Post} from '../../app/types/posts.types'
-import {basicUrl} from "../../constants";
+import {basicUrl, defaultSortBy, defaultSortOrder} from "../../constants";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 
@@ -24,8 +24,8 @@ export class ApiPostsService {
   getPosts(
     limit: number,
     skip: number= 0,
-    sortBy: string = 'createdDate',
-    sortOrder: string = 'desc',
+    sortBy: string = defaultSortBy,
+    sortOrder: string = defaultSortOrder,
     search?: string,)
     : Observable<HttpResponse<Post[]>> {
     return this.http.get<Post[]>(`${basicUrl}/posts?skip=${skip}&limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`, { observe: 'response'})
