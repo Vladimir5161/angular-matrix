@@ -3,13 +3,13 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from
 import {Observable, of, throwError} from "rxjs";
 import {catchError, map, tap} from 'rxjs/operators';
 import {AlertService} from "./alert.service";
-import {ApiService} from "./api.service";
+import {ApiAuthService} from "./api-auth.service";
 import {Router} from "@angular/router";
 
 @Injectable()
 export class GlobalHttpInterceptorService implements HttpInterceptor {
 
-  constructor(private alertService: AlertService, public apiService: ApiService, private router: Router,) {
+  constructor(private alertService: AlertService, public apiAuthService: ApiAuthService, private router: Router,) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any> | any> {
@@ -28,11 +28,11 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
           return throwError(
             'An error occurred:', error.error);
         } else if(error.status === 400) {
-          this.alertService.showAlert(error.message, true)
+          this.alertService.showAlert(error.error, true)
           return throwError(
             {status: error.status, body: error.error});
         } else if(error.status === 401) {
-          this.apiService.setToken('');
+          this.apiAuthService.setToken('');
           this.router.navigate(['/','login']);
           this.alertService.showAlert('you a not logged in, or your token expired', true)
           return throwError(

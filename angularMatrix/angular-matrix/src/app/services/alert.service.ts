@@ -1,35 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
+import {Alert} from "../types/alert.types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
-  private alertMessage = new Subject<any>();
-  private error = new Subject<any>();
+  private alert = new BehaviorSubject<Alert>({
+    message: '',
+    error:   false
+  });
 
-  setAlert(state: string) {
-    this.alertMessage.next(state);
+  setAlert(state: Alert) {
+    this.alert.next(state);
   }
-  setErrorBoolean(state: boolean) {
-    this.alertMessage.next(state);
-  }
-
-  getAlertMessage(): Subject<string> {
-    return this.alertMessage;
-  }
-  getErrorBoolean(): Subject<boolean> {
-    return this.error;
+  getAlert(): Subject<Alert> {
+    return this.alert;
   }
   constructor() { }
-  showAlert(text: string, error?: boolean) {
-    this.setAlert(text)
-    if(error) {
-      this.setErrorBoolean(error)
-    }
+  showAlert(text: string, error: boolean) {
+    this.setAlert({
+      message: text,
+      error: error
+    })
   }
   closeModal() {
-    this.setAlert('')
-    this.setErrorBoolean(false)
+    this.setAlert({
+      message: '',
+      error: false
+    })
   }
 }

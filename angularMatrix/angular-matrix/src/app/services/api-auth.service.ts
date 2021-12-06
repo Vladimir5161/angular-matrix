@@ -2,7 +2,7 @@ import {Injectable, OnInit} from '@angular/core';
 import {BehaviorSubject, Observable, Subject, Subscription} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Post} from '../../app/types/posts.types'
-import {basicUrl} from "../../assets/constants";
+import {basicUrl} from "../../constants";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
 
@@ -12,10 +12,12 @@ interface Auth {
   password: string,
   displayName?: string
 }
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
+export class ApiAuthService {
   private token = new BehaviorSubject<any>('');
 
   setToken(state: string) {
@@ -29,19 +31,25 @@ export class ApiService {
     const token = window.localStorage.getItem('token');
     this.setToken(token || '')
   }
-  getPosts(
-           limit: number,
-           skip: number= 0,
-           sortBy: string = 'createdDate',
-           sortOrder: string = 'desc',
-           search?: string,)
-    : Observable<HttpResponse<Post[]>> {
-    return this.http.get<Post[]>(`${basicUrl}/posts?skip=${skip}&limit=${limit?limit:''}&sortBy=${sortBy}&sortOrder=${sortOrder}`, { observe: 'response'})
+  requestResetPassword(email:string): Subscription {
+    return this.http.post<string>(`${basicUrl}/requestPasswordReset?email=${email}`, { observe: 'response'}).subscribe(resp => {
+      if (resp) {
+        this.alertService.showAlert('please check your email', false)
+      }
+    })
+  }
+  resetPassword(email:string, password: string, repeatPassword: string): Subscription {
+    const data = {email: email, password: password, repeatPassword: repeatPassword}
+    return this.http.post<string>(`${basicUrl}/resetPassword`, data, { observe: 'response'}).subscribe(resp => {
+      if (resp) {
+        this.alertService.showAlert('password changed, please try to login', false)
+      }
+    })
   }
   register(data: Auth): Subscription  {
-    return this.http.post<string>( `${basicUrl}/reqister`, data, {observe: 'response'}).subscribe(resp => {
-      if (resp.body) {
-        this.alertService.showAlert('account added')
+    return this.http.post<string>( `${basicUrl}/reqister`,  data, {observe: 'response'}).subscribe(resp => {
+      if (resp) {
+        this.alertService.showAlert('account added', false)
       }
     })
   }
@@ -50,13 +58,13 @@ export class ApiService {
         window.localStorage.setItem('token', resp.body.token)
         this.setToken(resp.body.token);
         this.router.navigate(['/','stories']);
-        this.alertService.showAlert('login success')
+        this.alertService.showAlert('login success', false)
     })
   }
   logout() {
     this.setToken('');
     window.localStorage.removeItem('token')
     this.router.navigate(['/','login']);
-    this.alertService.showAlert('logout success');
+    this.alertService.showAlert('logout success', false);
   }
 }
