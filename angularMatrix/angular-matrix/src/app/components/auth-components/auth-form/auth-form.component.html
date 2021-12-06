@@ -1,22 +1,20 @@
 <div class="authForm">
-  <div *ngIf="FormErrorService.errorMsg.value">
-    <div class="errorMess">{{FormErrorService.errorMsg.value}}</div>
-  </div>
+    <div class="errorMess">{{FormErrorService.getErrorMessage()}}</div>
   <form [formGroup]="authGroup">
     <div class="emailInput" *ngIf="register" [ngClass]="{
-      error: FormErrorService.errorMsg.type === 'displayName'
+      error: FormErrorService.errorMsg[ErrorEnum.displayName]
       }">
       <label for="displayName">Name </label>
       <input id="displayName" type="text" formControlName="displayName" (blur)="onInputValueChange()">
     </div>
     <div class="emailInput" [ngClass]="{
-      error: FormErrorService.errorMsg.type === 'email'
+      error: FormErrorService.errorMsg[ErrorEnum.email]
       }">
       <label for="email">Email </label>
       <input id="email" type="text" formControlName="email" (blur)="onInputValueChange()">
     </div>
     <div class="passwordInput" [ngClass]="{
-      error: FormErrorService.errorMsg.type === 'password'
+      error: FormErrorService.errorMsg[ErrorEnum.password]
     }">
       <label for="password">Password </label>
       <input  id="password" type="{{visibilityPassword? 'text': 'password'}}" formControlName="password" (blur)="onInputValueChange()"/>
@@ -25,7 +23,7 @@
       <ng-template #elseBlock><img  class="visibilityIcon" src="./assets/images/visibilityOff.svg" (click)="setVisibility('password')"/></ng-template>
     </div>
     <div class="passwordInput" *ngIf="register" [ngClass]="{
-      error: FormErrorService.errorMsg.type === 'repeatPassword'
+      error: FormErrorService.errorMsg[ErrorEnum.repeatPassword]
     }">
       <label for="repeatPassword">Repeat Password </label>
       <input  id="repeatPassword" type="{{visibilityPasswordRepeat? 'text': 'password'}}" formControlName="repeatPassword" (blur)="onInputValueChange()"/>
@@ -36,7 +34,8 @@
   </form>
   <button class="add-btn" type="submit"
           style="transform: translateY(20px)"
-          [ngClass]="{notReady: FormErrorService.errorMsg.value || !authGroup.valid}"
+          [ngClass]="{notReady: FormErrorService.getErrorMessage() || !authGroup.valid}"
           style="display: block; margin: 20px auto"
-          (click)="onSubmitBtn($event)" [disabled]="FormErrorService.errorMsg.value || !authGroup.valid">{{register? "Creat Account" : "Login"}}</button>
+          (click)="onSubmitBtn($event)" [disabled]="FormErrorService.getErrorMessage() || !authGroup.valid">
+    {{register? "Creat Account" : "Login"}}</button>
 </div>

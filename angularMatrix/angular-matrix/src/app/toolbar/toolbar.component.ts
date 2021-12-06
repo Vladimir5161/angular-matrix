@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../services/api.service";
+import {ApiAuthService} from "../services/api-auth.service";
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +8,7 @@ import {ApiService} from "../services/api.service";
 })
 export class ToolbarComponent implements OnInit {
   token: string = '';
-  constructor(public ApiService: ApiService) { }
+  constructor(public ApiService: ApiAuthService) { }
 
   ngOnInit(): void {
     this.ApiService.getToken().subscribe(token => {

@@ -3,7 +3,8 @@
     <app-search (stringEvent)="getString($event)" ></app-search>
     <app-add (setAddNewStory)="setAddNewStory()" [addNewStory]="addNewStory"></app-add>
   </div>
-  <app-stories-list></app-stories-list>
+  <app-modal></app-modal>
+  <app-stories-list [searchStr]="searchStr"></app-stories-list>
   <div *ngIf="addNewStory">
     <app-add-story-modal (closeModalFunc)="closeAddNewStory()">
     </app-add-story-modal>

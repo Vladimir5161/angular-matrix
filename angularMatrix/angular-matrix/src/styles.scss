@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @use "/src/variables";
+
+@keyframes AlertAnim {
+  from {
+    transform: translateX(-1500px);
+
+  }
+  to {
+    transform: translateX(0);
+  }
+}
 .header {
   width: 100%;
 }
@@ -18,9 +28,9 @@
   to {     background: #073a9a ;}
 }
 .add-btn {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 500;
-  width: 140px;
+  width: 170px;
   padding: 5px;
   border-radius: 15px;
   background: variables.$defaultGradient;
@@ -51,7 +61,7 @@
 }
 .errorMess {
   position: absolute;
-  top: 5px;
+  top: 0;
   left: 0;
   right: 0;
   font-size: 10px;
@@ -84,5 +94,15 @@
   &:hover {
     cursor: pointer;
     color: #fff;
+  }
+}
+.contentTextbox {
+  textarea {
+    border-radius: 10px;
+    padding: 5px;
+    font-size: variables.$defaultFontSize;
+    color: #000;
+    min-height: 100px;
+    overflow: auto;
   }
 }

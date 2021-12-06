@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AlertService} from "../../services/alert.service";
 import {filter} from "rxjs/operators";
+import {Alert} from "../../types/alert.types";
+import {expireAlertTime} from "../../../constants";
 
 @Component({
   selector: 'app-alert',
@@ -15,15 +17,17 @@ export class AlertComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.AlertService.getAlertMessage()
-      .pipe(filter((message) => typeof message === 'string'))
-      .subscribe((message: string) => {
-        console.log(message)
-        this.alertMessage = message
+    this.AlertService.getAlert()
+      .pipe(filter((alert: Alert) => typeof alert.message === 'string'))
+      .subscribe((alert: Alert) => {
+        this.alertMessage = alert.message;
+        this.error = alert.error
     })
-    this.AlertService.getErrorBoolean().subscribe(error => {
-      this.error = error
-    })
+    setTimeout(() => {
+      if(!this.closing) {
+        this.closeModal()
+      }
+    }, expireAlertTime)
   }
   closeModal() {
     this.closing = true;
@@ -33,7 +37,6 @@ export class AlertComponent implements OnInit {
       this.AlertService.closeModal()
       this.closing = false
     }, 900)
-
   }
 
 }

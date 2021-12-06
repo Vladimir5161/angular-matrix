@@ -1,0 +1,36 @@
+<div class="storyModalWrapper"  *ngIf="story && story.id">
+    <div class="modalWindow" >
+      <div class="titleInput modalTitle">
+      <div *ngIf="!titleEdit; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock><h3 (click)="edit(true)"><strong>Title:</strong> {{story.title}}</h3></ng-template>
+        <ng-template #elseBlock>
+            <h3><strong>Title:</strong></h3> <input type="text" [(ngModel)]="titleEditText" name="titleEditText" #titleEdit [defaultValue]="titleEditText" (blur)="edit(false)"/>
+        </ng-template>
+      </div>
+      <button class="closeModal" (click)="closeModal()">X</button>
+      <div class="storyMain">
+        <label for="storyImg">
+          <button class="closeModal" (click)="cancelUpload($event)" *ngIf="imageService.postId === story.id">X</button>
+          <img class="storyImage" alt ="" src="{{story.imageUrl || 'https://i0.wp.com/reviveyouthandfamily.org/wp-content/uploads/2016/11/house-placeholder.jpg?ssl=1'}}" />
+          <button type="button" class="add-btn imageUploadBtn" (click)="updatePostImage($event)" *ngIf="imageService.postId === story.id">upload</button>
+        </label>
+        <input type="file" id="storyImg" (change)="imageService.onFileChange($event, story.id)"/>
+        <div class="storyInfoWrapper">
+          <div class="authorName"><strong>author:</strong>{{story.author? story.author.displayName : 'unknown'}}</div>
+          <div class="updatedDate"><strong>updated at:</strong> {{story.updatedDate | moment}}</div>
+          <div class="createdDate"><strong>created at:</strong> {{story.createdDate | moment}}</div>
+          <div class="storyLikes">
+            <div class="likesCount"><strong>Likes:</strong> {{story.likesCount}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="contentTextbox">
+        <div *ngIf="!contentEdit; then thenBlockCont else elseBlockCont"></div>
+        <ng-template #thenBlockCont><p (click)="edit(true, true)">{{story.content}}</p></ng-template>
+        <ng-template #elseBlockCont>
+          <textarea type="text" [(ngModel)]="contentEditText" name="contentEditText" #contentEdit [defaultValue]="contentEditText" (blur)="edit(false, true)"></textarea>
+        </ng-template>
+      </div>
+    </div>
+</div>
+

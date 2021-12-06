@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from '../../../services/api.service'
+import {ApiAuthService} from '../../../services/api-auth.service'
 
 @Component({
   selector: 'app-register',
@@ -9,11 +9,11 @@ import {ApiService} from '../../../services/api.service'
 export class RegisterComponent implements OnInit {
   email: string = '';
   password: string = '';
-  constructor(private ApiService: ApiService) { }
+  constructor(private apiAuthService: ApiAuthService) { }
 
   ngOnInit(): void {
   }
   submitFormValues(event: any) {
-    this.ApiService.register({email: event.email, password: event.password, displayName: event.displayName})
+    this.apiAuthService.register({email: event.email, password: event.password, displayName: event.displayName})
   }
 }

@@ -1,7 +1,7 @@
 <div class="addStoryModal">
   <button class="closeModal" (click)="closeModal()">X</button>
   <div *ngIf="!storyGroup.valid">
-      <div class="errorMess">{{formErrorService.errorMsg}}</div>
+      <div class="errorMess">{{formErrorService.getErrorMessage()}}</div>
   </div>
   <form [formGroup]="storyGroup">
     <div class="titleInput" [ngClass]="{
@@ -16,15 +16,15 @@
       <label for="content">Content </label>
       <textarea  id="content" type="text" formControlName="content" (ngModelChange)="getErrorMessage()"></textarea>
     </div>
-    <div class="imageLabel" [ngClass]="{notReady: imageSrc}">
+    <div class="imageLabel" [ngClass]="{notReady: imageService.imageSrc}">
       <label for="image">
-        {{imageSrc? 'Image Added': 'Add Image'}}</label>
-      <input id="image" type="file" (change)="onFileChange($event)">
+        {{imageService.imageSrc? 'Image Added': 'Add Image'}}</label>
+      <input id="image" type="file" (change)="imageService.onFileChange($event)">
     </div>
     <button class="add-btn" type="submit"
             style="transform: translateY(20px)"
-            [ngClass]="{notReady: !imageSrc || !storyGroup.valid}"
-            (click)="onSubmitBtn($event)" [disabled]="!imageSrc || !storyGroup.valid">Add Story</button>
+            [ngClass]="{notReady: !imageService.imageSrc || !storyGroup.valid}"
+            (click)="onSubmitBtn($event)" [disabled]="!imageService.imageSrc || !storyGroup.valid">Add Story</button>
   </form>
 
 </div>

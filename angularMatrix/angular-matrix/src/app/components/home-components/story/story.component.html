@@ -1,5 +1,17 @@
 <div class="story">
-  <h1>{{header}}</h1>
-  <p>{{description}}</p>
-  <div>{{deadline.format('ll')}}</div>
+  <h3><strong>Title:</strong> {{title}}</h3>
+  <div class="storyMain">
+    <img alt ="" src="{{imageUrl || 'https://i0.wp.com/reviveyouthandfamily.org/wp-content/uploads/2016/11/house-placeholder.jpg?ssl=1'}}" />
+    <div class="storyInfoWrapper">
+      <div class="authorName"><strong>author: </strong>{{author? author.displayName : 'unknown'}}</div>
+      <div class="updatedDate"><strong>updated at:</strong> {{updatedDate | moment}}</div>
+      <div class="createdDate"><strong>created at:</strong> {{createdDate | moment}}</div>
+      <div class="storyLikes">
+        <div class="likesCount"><strong>Likes:</strong> {{likesCount}}</div>
+        <img src="/assets/images/like.png" [ngClass]="isLikedByCurrentUser? 'liked': ''" (click)="likeUnlikePost()">
+      </div>
+    </div>
+  </div>
+  <p>{{content}}</p>
+  <button type="submit" class="add-btn" (click)="openModal($event)">Read More</button>
 </div>

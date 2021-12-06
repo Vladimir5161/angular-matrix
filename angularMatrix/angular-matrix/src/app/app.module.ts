@@ -5,18 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HomeModule} from "./pages/home/home.module";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
-import {MomentPipe} from "./pipes/moment.pipe";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "./pages/auth/auth.module";
 import {GlobalHttpInterceptorService} from "./services/http-interceptor.service";
-import {AlertModule} from "./components/alert-component/alert.module";
+import {AlertComponent} from "./components/alert-component/alert.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
-    MomentPipe,
-
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +23,7 @@ import {AlertModule} from "./components/alert-component/alert.module";
     HomeModule,
     HttpClientModule,
     AuthModule,
-    AlertModule
+    FormsModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: GlobalHttpInterceptorService, multi: true}],
   exports: [

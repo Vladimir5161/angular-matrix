@@ -7,11 +7,24 @@ import {SearchComponent} from "../../components/home-components/search/search.co
 import {AddComponent} from "../../components/home-components/add/add.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AddStoryModalComponent} from "../../components/home-components/add-story-modal/add-story-modal.component";
+import {MomentPipe} from "../../pipes/moment.pipe";
+import {SearchPipe} from "../../pipes/search.pipe";
+import {ModalComponent} from "../../components/home-components/modal/modal.component";
 
 
 
 @NgModule({
-  declarations: [HomeComponent, StoriesListComponent, StoryComponent, SearchComponent, AddComponent, AddStoryModalComponent],
+  declarations: [
+    HomeComponent,
+    StoriesListComponent,
+    StoryComponent,
+    SearchComponent,
+    AddComponent,
+    AddStoryModalComponent,
+    MomentPipe,
+    SearchPipe,
+    ModalComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

@@ -65,14 +65,5 @@
     font-size: variables.$defaultFontSize;
   }
 }
-.contentTextbox {
-  textarea {
-    border-radius: 10px;
-    padding: 5px;
-    font-size: variables.$defaultFontSize;
-    color: #000;
-    min-height: 100px;
-    overflow: auto;
-  }
-}
+
 

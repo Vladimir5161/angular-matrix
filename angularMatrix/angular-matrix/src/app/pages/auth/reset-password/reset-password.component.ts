@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiService} from "../../../services/api.service";
+import {ApiAuthService} from "../../../services/api-auth.service";
 
 @Component({
   selector: 'app-reset-password',
@@ -8,11 +8,11 @@ import {ApiService} from "../../../services/api.service";
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiAuthService: ApiAuthService) { }
 
   ngOnInit(): void {
   }
   submitFormValues(event: any) {
-    this.apiService.requestResetPassword(event)
+    this.apiAuthService.requestResetPassword(event)
   }
 }
