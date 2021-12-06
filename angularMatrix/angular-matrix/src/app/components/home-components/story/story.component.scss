@@ -32,8 +32,13 @@
 .storyMain {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0 5px;
+  margin: 0 5px 10px 5px;
   grid-gap: 5px;
+  @media screen and  (max-width: 375px) {
+    div {
+      font-size: 12px;
+    }
+}
 }
 .storyLikes {
   padding: 10px 0 0 0;

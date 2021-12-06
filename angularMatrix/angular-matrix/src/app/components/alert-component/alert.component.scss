@@ -16,7 +16,9 @@
     border-radius: 10px;
     align-items: center;
     animation: 1s AlertAnim ease-in-out;
-
+    @media screen and (max-width: 768px) {
+      width: 80vw;
+    }
     div {
       font-size: variables.$secondaryFontSize;
       font-weight: variables.$defaultFontWeight;
