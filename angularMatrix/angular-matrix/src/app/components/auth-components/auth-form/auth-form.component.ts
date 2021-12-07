@@ -1,5 +1,5 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {validatePasswordRepeat} from "../../../validators/form.validator";
 import {FormErrorService} from "../../../services/form-error.service";
 import {ErrorEnum} from '../../../types/form.types'

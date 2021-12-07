@@ -13,7 +13,7 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any> | any> {
-
+    this.apiAuthService.setLoading(true)
     const token: string | null = window.localStorage.getItem('token');
     const authReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${token}` || ''),
@@ -21,9 +21,11 @@ export class GlobalHttpInterceptorService implements HttpInterceptor {
     return next.handle(authReq).pipe(
       tap((event) => {
         if (event instanceof HttpResponse)
+          this.apiAuthService.setLoading(false)
           console.log('Server response')
       }),
       catchError((error) => {
+        this.apiAuthService.setLoading(false)
         if (error.status === 0) {
           return throwError(
             'An error occurred:', error.error);

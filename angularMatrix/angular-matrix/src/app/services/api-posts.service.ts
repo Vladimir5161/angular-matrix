@@ -1,17 +1,8 @@
-import {Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, Subject, Subscription} from "rxjs";
+import {Injectable} from '@angular/core';
+import {Observable} from "rxjs";
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Post} from '../../app/types/posts.types'
 import {basicUrl, defaultSortBy, defaultSortOrder} from "../../constants";
-import {Router} from "@angular/router";
-import {AlertService} from "./alert.service";
-
-
-interface Auth {
-  email: string,
-  password: string,
-  displayName?: string
-}
 
 
 @Injectable({

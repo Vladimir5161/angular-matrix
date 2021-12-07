@@ -1,8 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Author} from "../../../types/posts.types";
 import {StoriesService} from "../../../services/stories.service";
 import {ModalService} from "../../../services/modal.service";
-import {ImageService} from "../../../services/image.service";
 import {basicUrl} from "../../../../constants";
 
 @Component({

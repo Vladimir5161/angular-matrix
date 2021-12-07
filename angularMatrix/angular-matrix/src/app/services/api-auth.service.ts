@@ -1,17 +1,10 @@
-import {Injectable, OnInit} from '@angular/core';
-import {BehaviorSubject, Observable, Subject, Subscription} from "rxjs";
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Post} from '../../app/types/posts.types'
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Subject, Subscription} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 import {basicUrl} from "../../constants";
 import {Router} from "@angular/router";
 import {AlertService} from "./alert.service";
-
-
-interface Auth {
-  email: string,
-  password: string,
-  displayName?: string
-}
+import {Auth} from "../types/auth.types";
 
 
 @Injectable({
@@ -19,7 +12,7 @@ interface Auth {
 })
 export class ApiAuthService {
   private token = new BehaviorSubject<any>('');
-
+  loading = new BehaviorSubject<boolean>(false);
   setToken(state: string) {
     this.token.next(state);
   }
@@ -30,6 +23,9 @@ export class ApiAuthService {
   constructor(private http: HttpClient, private router: Router, public alertService: AlertService) {
     const token = window.localStorage.getItem('token');
     this.setToken(token || '')
+  }
+  setLoading(value: boolean) {
+    this.loading.next(value)
   }
   requestResetPassword(email:string): Subscription {
     return this.http.post<string>(`${basicUrl}/requestPasswordReset?email=${email}`, { observe: 'response'}).subscribe(resp => {

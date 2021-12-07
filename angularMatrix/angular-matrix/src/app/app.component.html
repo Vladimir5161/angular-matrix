@@ -4,6 +4,7 @@
   </header>
   <main>
     <app-alert></app-alert>
+    <div *ngIf="loading" class="loader"><img src="assets/images/loading.gif"/></div>
     <router-outlet></router-outlet>
   </main>
 </div>
