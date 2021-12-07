@@ -2,7 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Author} from "../../../types/posts.types";
 import {StoriesService} from "../../../services/stories.service";
 import {ModalService} from "../../../services/modal.service";
-import {basicUrl} from "../../../../constants";
+import {defaultImage} from '../../../../constants'
+import {ImageService} from "../../../services/image.service";
 
 @Component({
   selector: 'app-story',
@@ -19,10 +20,11 @@ export class StoryComponent implements OnInit {
   @Input() author: Author | null = null
   @Input() isLikedByCurrentUser: boolean = false
   @Input() postId: string = ''
-  basicUrl: string = basicUrl
-  constructor(private storiesService: StoriesService, private modalService: ModalService) { }
+  defaultImage: string = ''
+  constructor(private storiesService: StoriesService, private modalService: ModalService, public imageService: ImageService) { }
 
   ngOnInit(): void {
+    this.defaultImage = defaultImage
   }
   likeUnlikePost() {
     this.storiesService.likeUnlikePost(this.postId, this.isLikedByCurrentUser)

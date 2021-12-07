@@ -9,9 +9,10 @@
       </div>
       <button class="closeModal" (click)="closeModal()">X</button>
       <div class="storyMain">
-        <label for="storyImg">
+        <label for="storyImg" class="imageLabel">
           <button class="closeModal" (click)="cancelUpload($event)" *ngIf="imageService.postId === story.id">X</button>
-          <img class="storyImage" alt ="" src="{{story.imageUrl || 'https://i0.wp.com/reviveyouthandfamily.org/wp-content/uploads/2016/11/house-placeholder.jpg?ssl=1'}}" />
+          <img class="storyImage" alt ="" src="{{story.imageUrl || defaultImage}}"
+               (error)="imageService.errorImage($event)" />
           <button type="button" class="add-btn imageUploadBtn" (click)="updatePostImage($event)" *ngIf="imageService.postId === story.id">upload</button>
         </label>
         <input type="file" id="storyImg" (change)="imageService.onFileChange($event, story.id)"/>

@@ -4,7 +4,6 @@ import {Post} from "../../../types/posts.types";
 import {StoriesService} from "../../../services/stories.service";
 import {map} from "rxjs/operators";
 
-
 @Component({
   selector: 'app-stories-list',
   templateUrl: './stories-list.component.html',

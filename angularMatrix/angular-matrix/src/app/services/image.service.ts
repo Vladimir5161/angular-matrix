@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {defaultImage} from "../../constants";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,9 @@ export class ImageService {
     getFile($event.target.files[0]).then(value => {
         this.imageSrc = value
     })
+  }
+  errorImage(event: any) {
+    const img = event.target
+    img.src = defaultImage
   }
 }

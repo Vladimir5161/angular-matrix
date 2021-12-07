@@ -3,6 +3,8 @@ import {ModalService} from "../../../services/modal.service";
 import {StoriesService} from "../../../services/stories.service";
 import {Post} from "../../../types/posts.types";
 import {ImageService} from "../../../services/image.service";
+import {defaultImage} from '../../../../constants'
+
 const defaultPost = {
   id: '',
   createdDate: '',
@@ -37,6 +39,7 @@ export class ModalComponent implements OnInit {
       element.nativeElement.focus()
     }
   }
+  defaultImage: string = ''
   visible: boolean = false;
   story: Post = defaultPost;
   titleEdit: boolean = false;
@@ -46,6 +49,7 @@ export class ModalComponent implements OnInit {
   constructor(public modalService: ModalService, private storiesService: StoriesService, public imageService: ImageService) { }
 
   ngOnInit(): void {
+    this.defaultImage = defaultImage
     this.modalService.getModal().subscribe(value => {
       this.visible = value.visible;
       const story = this.storiesService.getStory(value.postId)
