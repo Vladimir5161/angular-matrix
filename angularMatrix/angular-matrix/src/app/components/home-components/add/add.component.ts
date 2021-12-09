@@ -2,8 +2,10 @@ import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 
 @Component({
   selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  template: `
+    <div>
+        <button class="add-btn" [ngClass]="{notReady: addNewStory}" type="submit" (click)="submitBtn($event)" >Add Story</button>
+    </div>`,
 })
 export class AddComponent implements OnInit {
   @Output()

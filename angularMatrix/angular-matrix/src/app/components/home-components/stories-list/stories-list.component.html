@@ -1,7 +1,7 @@
-<div *ngIf="stories.length > 0" class="storiesWrapper">
-  <div *ngIf="(stories | searchPipe: searchStr).length > 0; then thenBlock else elseBlock" ></div>
+<div *ngIf="stories | async | sortPipe" class="storiesWrapper">
+  <div *ngIf="(stories | async | sortPipe | searchPipe: searchStr).length > 0; then thenBlock else elseBlock" ></div>
   <ng-template #thenBlock>
-    <div *ngFor="let story of stories | searchPipe: searchStr" >
+    <div *ngFor="let story of stories | async | sortPipe | searchPipe: searchStr" >
         <app-story [createdDate]="story.createdDate"
                    [updatedDate]="story.updatedDate"
                    [title]="story.title"

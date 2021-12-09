@@ -43,7 +43,8 @@ export class ModalComponent implements OnInit {
   visible: boolean = false;
   story: Post = defaultPost;
   titleEdit: boolean = false;
-  titleEditText: string = ''
+  titleEditText: string = '';
+  updatedDate: string = '';
   contentEdit: boolean = false;
   contentEditText: string = ''
   constructor(public modalService: ModalService, private storiesService: StoriesService, public imageService: ImageService) { }
@@ -52,11 +53,14 @@ export class ModalComponent implements OnInit {
     this.defaultImage = defaultImage
     this.modalService.getModal().subscribe(value => {
       this.visible = value.visible;
-      const story = this.storiesService.getStory(value.postId)
-      if(story) {
-        this.titleEditText = story.title
-        this.contentEditText = story.content
-        this.story = story;
+      if(value.visible) {
+        const story = this.storiesService.getStory(value.postId)
+        if (story) {
+          this.titleEditText = story.title
+          this.contentEditText = story.content
+          this.updatedDate = story.updatedDate
+          this.story = story;
+        }
       }
     })
   }

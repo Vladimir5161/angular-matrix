@@ -10,6 +10,7 @@ import {AddStoryModalComponent} from "../../components/home-components/add-story
 import {MomentPipe} from "../../pipes/moment.pipe";
 import {SearchPipe} from "../../pipes/search.pipe";
 import {ModalComponent} from "../../components/home-components/modal/modal.component";
+import {SortPipe} from "../../pipes/sort.pipe";
 
 
 
@@ -23,6 +24,7 @@ import {ModalComponent} from "../../components/home-components/modal/modal.compo
     AddStoryModalComponent,
     MomentPipe,
     SearchPipe,
+    SortPipe,
     ModalComponent,
   ],
   imports: [

@@ -4,7 +4,7 @@ import {HomeComponent} from './pages/home/home.component'
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {LoginComponent} from "./pages/auth/login/login.component";
 import {ResetPasswordComponent} from "./pages/auth/reset-password/reset-password.component";
-import {StoriesResolver} from "./services/stories.resolver";
+import {StoriesResolver} from "./resolvers/stories.resolver";
 import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [

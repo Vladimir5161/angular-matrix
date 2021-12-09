@@ -58,6 +58,7 @@ export class StoriesService {
         const post = this.stories.value.filter(i => i.id === postId)[0]
         post.title = resp.body.title;
         post.content = resp.body.content
+        post.updatedDate = resp.body.updatedDate
         this.alertService.showAlert('story updated', false)
       }
     })

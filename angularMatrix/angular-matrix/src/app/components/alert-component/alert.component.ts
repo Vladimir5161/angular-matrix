@@ -36,7 +36,7 @@ export class AlertComponent implements OnInit {
       this.error = false
       this.AlertService.closeModal()
       this.closing = false
-    }, 900)
+    }, 990)
   }
 
 }
