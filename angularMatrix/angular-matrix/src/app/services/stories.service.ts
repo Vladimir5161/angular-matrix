@@ -4,6 +4,7 @@ import {Post} from "../types/posts.types";
 import {BehaviorSubject, Subject} from "rxjs";
 import {ApiPostsService} from "./api-posts.service";
 import {AlertService} from "./alert.service";
+import {filter, map, tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -27,49 +28,42 @@ export class StoriesService {
   getStoriesApi(limit: number) {
     this.ApiAuthService.getToken().subscribe(token => {
       if(token) {
-        this.ApiPostsService.getPosts(limit).subscribe(resp => {
-          if(resp.body) {
-            this.setStories(resp.body)
-          }
+        this.ApiPostsService.getPosts(limit).pipe(map(value =>value.body), filter(this.isNonNull)).subscribe(resp => {
+            this.setStories(resp)
         })
       }
     })
   }
   addPost(title: string, content: string, image: any) {
-    this.ApiPostsService.addPost(title, content, image).subscribe(responce => {
-      if(responce.body) {
-        this.addStory(responce.body)
+    this.ApiPostsService.addPost(title, content, image).pipe(map(value =>value.body), filter(this.isNonNull)).subscribe(responce => {
+        this.addStory(responce)
         this.alertService.showAlert('story added', false)
-      }
     })
   }
   likeUnlikePost(postId: string, like: boolean) {
-    this.ApiPostsService.likeUnlikePost(postId, !like).subscribe(resp => {
-      if(resp) {
+    this.ApiPostsService.likeUnlikePost(postId, !like).pipe(map(value =>value.body), filter(this.isNonNull)).subscribe(resp => {
         const post = this.stories.value.filter(i => i.id === postId)[0]
         post.isLikedByCurrentUser = !like;
         post.likesCount = like ? post.likesCount - 1 : post.likesCount + 1;
-      }
     })
   }
+  isNonNull<T>(value: T): value is NonNullable<T> {
+    return value != null;
+  }
   updatePost(title: string, content: string, postId: string) {
-    this.ApiPostsService.updatePost(title, content, postId).subscribe(resp => {
-      if(resp.body) {
+    this.ApiPostsService.updatePost(title, content, postId).pipe(map(value =>value.body), filter(this.isNonNull)).subscribe(story => {
         const post = this.stories.value.filter(i => i.id === postId)[0]
-        post.title = resp.body.title;
-        post.content = resp.body.content
-        post.updatedDate = resp.body.updatedDate
+        post.title = story.title;
+        post.content = story.content
+        post.updatedDate = story.updatedDate
         this.alertService.showAlert('story updated', false)
-      }
     })
   }
   updatePostImage(postId: string, image: string) {
-    this.ApiPostsService.updatePostImage(postId, image).subscribe(resp => {
-      if(resp.body) {
+    this.ApiPostsService.updatePostImage(postId, image).pipe(map(value =>value.body), filter(this.isNonNull)).subscribe(resp => {
         const post = this.stories.value.filter(i => i.id === postId)[0]
         this.alertService.showAlert(`story image ${post.imageUrl? 'updated': 'added'}`, false)
-        post.imageUrl = resp.body.imageUrl;
-      }
+        post.imageUrl = resp.imageUrl;
     })
   }
 }

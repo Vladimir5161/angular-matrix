@@ -17,16 +17,12 @@ export class ImageService {
     if(postId) {
       this.postId = postId
     }
-    function getFile(file: Blob) {
-      return new Promise((resolve: (value: any) => void, reject) => {
+    new Promise((resolve: (value: any) => void, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(file);
+        reader.readAsDataURL($event.target.files[0]);
+        reader.onload = () => resolve($event.target.files[0]);
         reader.onerror = error => reject(error);
-      });
-    }
-
-    getFile($event.target.files[0]).then(value => {
+      }).then(value => {
         this.imageSrc = value
     })
   }

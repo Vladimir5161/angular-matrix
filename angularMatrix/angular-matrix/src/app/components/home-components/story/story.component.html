@@ -1,18 +1,18 @@
 <div class="story">
-  <h3><strong>Title:</strong> {{title}}</h3>
+  <h3><strong>Title:</strong> {{story.title}}</h3>
   <div class="storyMain">
-    <img alt ="" src="{{imageUrl || defaultImage}}"
+    <img alt ="" src="{{story.imageUrl || defaultImage}}"
          (error)="imageService.errorImage($event)"/>
     <div class="storyInfoWrapper">
-      <div class="authorName"><strong>author: </strong>{{author? author.displayName : 'unknown'}}</div>
-      <div class="updatedDate"><strong>updated at:</strong> {{updatedDate | moment}}</div>
-      <div class="createdDate"><strong>created at:</strong> {{createdDate | moment}}</div>
+      <div class="authorName"><strong>author: </strong>{{story.author? story.author.displayName : 'unknown'}}</div>
+      <div class="updatedDate"><strong>updated at:</strong> {{story.updatedDate | moment}}</div>
+      <div class="createdDate"><strong>created at:</strong> {{story.createdDate | moment}}</div>
       <div class="storyLikes">
-        <div class="likesCount"><strong>Likes:</strong> {{likesCount}}</div>
-        <img src="/assets/images/like.png" [ngClass]="isLikedByCurrentUser? 'liked': ''" (click)="likeUnlikePost()">
+        <div class="likesCount"><strong>Likes:</strong> {{story.likesCount}}</div>
+        <img src="/assets/images/like.png" [ngClass]="story.isLikedByCurrentUser? 'liked': ''" (click)="likeUnlikePost()">
       </div>
     </div>
   </div>
-  <p>{{content}}</p>
+  <p>{{story.content}}</p>
   <button type="submit" class="add-btn" (click)="openModal($event)">Read More</button>
 </div>

@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Author} from "../../../types/posts.types";
+import {Author, Post} from "../../../types/posts.types";
 import {StoriesService} from "../../../services/stories.service";
 import {ModalService} from "../../../services/modal.service";
-import {defaultImage} from '../../../../constants'
+import {defaultImage, defaultPost} from '../../../../constants'
 import {ImageService} from "../../../services/image.service";
 
 @Component({
@@ -11,15 +11,7 @@ import {ImageService} from "../../../services/image.service";
   styleUrls: ['./story.component.scss']
 })
 export class StoryComponent implements OnInit {
-  @Input() title: string = ''
-  @Input() content: string = ''
-  @Input() createdDate: string = ''
-  @Input() updatedDate: string = ''
-  @Input() imageUrl: string | null = ''
-  @Input() likesCount: number = 0
-  @Input() author: Author | null = null
-  @Input() isLikedByCurrentUser: boolean = false
-  @Input() postId: string = ''
+  @Input() story: Post = defaultPost
   defaultImage: string = ''
   constructor(private storiesService: StoriesService, private modalService: ModalService, public imageService: ImageService) { }
 
@@ -27,10 +19,10 @@ export class StoryComponent implements OnInit {
     this.defaultImage = defaultImage
   }
   likeUnlikePost() {
-    this.storiesService.likeUnlikePost(this.postId, this.isLikedByCurrentUser)
+    this.storiesService.likeUnlikePost(this.story.id, this.story.isLikedByCurrentUser)
   }
   openModal(event: any) {
     event.preventDefault()
-    this.modalService.openModal(this.postId)
+    this.modalService.openModal(this.story.id)
   }
 }

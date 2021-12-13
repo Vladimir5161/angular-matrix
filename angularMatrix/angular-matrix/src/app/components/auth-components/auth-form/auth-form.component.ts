@@ -22,13 +22,13 @@ export class AuthFormComponent implements OnInit {
     this.FormErrorService.clearError()
     this.authGroup = this.register? this.fb.group({
         email: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(3), Validators.email ])} ],
-        password: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(5)])}],
-        repeatPassword: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.minLength(5)]), }],
+        password: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(3)])}],
+        repeatPassword: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.minLength(3)]), }],
         displayName: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(3)])}],
       }, {validators: validatePasswordRepeat}) :
       this.fb.group({
         email: ['', {updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(3), Validators.email ])} ],
-        password: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.minLength(5)])}],
+        password: ['', {updateOn: 'change', validators: Validators.compose([Validators.required, Validators.minLength(3)])}],
       }, )
   }
   get authGroupControls() {

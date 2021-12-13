@@ -2,15 +2,7 @@
   <div *ngIf="(stories | async | sortPipe | searchPipe: searchStr).length > 0; then thenBlock else elseBlock" ></div>
   <ng-template #thenBlock>
     <div *ngFor="let story of stories | async | sortPipe | searchPipe: searchStr" >
-        <app-story [createdDate]="story.createdDate"
-                   [updatedDate]="story.updatedDate"
-                   [title]="story.title"
-                   [content]="story.content"
-                   [imageUrl]="story.imageUrl"
-                   [likesCount]="story.likesCount"
-                   [author]="story.author"
-                   [isLikedByCurrentUser]="story.isLikedByCurrentUser"
-                   [postId]="story.id"
+        <app-story [story]="story"
         ></app-story>
     </div>
   </ng-template>

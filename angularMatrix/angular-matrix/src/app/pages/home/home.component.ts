@@ -5,22 +5,20 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   searchStr: string = '';
   addNewStory: boolean = false;
   constructor() { }
 
-  ngOnInit(): void {
-  }
   getString($event: string) {
     this.searchStr = $event
-  }
-  setAddNewStory() {
-    this.addNewStory = true
   }
   closeAddNewStory() {
     this.addNewStory = false
   }
-
+  submitBtn(event: MouseEvent) {
+    event.preventDefault()
+    this.addNewStory = true
+  }
 
 }

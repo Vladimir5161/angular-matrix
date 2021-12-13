@@ -1,7 +1,9 @@
 <div class="Wrapper">
     <div class="homeHeader">
       <app-search (stringEvent)="getString($event)" ></app-search>
-      <app-add (setAddNewStory)="setAddNewStory()" [addNewStory]="addNewStory"></app-add>
+      <div>
+        <button class="add-btn" [ngClass]="{notReady: addNewStory}" type="submit" (click)="submitBtn($event)" >Add Story</button>
+      </div>
     </div>
     <app-modal></app-modal>
     <app-stories-list [searchStr]="searchStr"></app-stories-list>

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {ApiAuthService} from "../../../services/api-auth.service";
 import {FormErrorService} from "../../../services/form-error.service";
@@ -10,12 +10,12 @@ import {ImageService} from "../../../services/image.service";
   templateUrl: './add-story-modal.component.html',
   styleUrls: ['./add-story-modal.component.scss']
 })
-export class AddStoryModalComponent implements OnInit {
+export class AddStoryModalComponent implements OnInit, OnDestroy {
   @Output()
   closeModalFunc = new EventEmitter<boolean>();
   storyGroup = this.fb.group({
     title: ['', {updateOn: 'blur',validators: Validators.compose([Validators.required, Validators.minLength(3)])}],
-    content: ['', { updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(5)])}],
+    content: ['', { updateOn: 'blur', validators: Validators.compose([Validators.required, Validators.minLength(3)])}],
   });
   token: string = ''
   constructor(private fb: FormBuilder,
@@ -30,12 +30,16 @@ export class AddStoryModalComponent implements OnInit {
       this.token = token
     })
   }
+  ngOnDestroy() {
+    this.apiService.getToken().unsubscribe()
+  }
+
   get storyGroupControls() {
     return this.storyGroup.controls;
   }
 
   getErrorMessage() {
-    this.formErrorService.showErrorMessage( this.storyGroup, !!this.token)
+    this.formErrorService.showErrorMessage( this.storyGroup)
   }
   closeModal() {
     this.closeModalFunc.emit()

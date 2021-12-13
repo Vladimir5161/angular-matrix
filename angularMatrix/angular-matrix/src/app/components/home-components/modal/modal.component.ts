@@ -1,32 +1,17 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ModalService} from "../../../services/modal.service";
 import {StoriesService} from "../../../services/stories.service";
 import {Post} from "../../../types/posts.types";
 import {ImageService} from "../../../services/image.service";
-import {defaultImage} from '../../../../constants'
+import {defaultImage, defaultPost} from '../../../../constants'
 
-const defaultPost = {
-  id: '',
-  createdDate: '',
-  updatedDate: '',
-  title: '',
-  content: '',
-  imageUrl: null,
-  likesCount: 0,
-  author: {
-    id: '',
-    email: '',
-    avatarUrl: null,
-    displayName: '',
-  },
-  isLikedByCurrentUser: false
-}
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
   @ViewChild('titleEdit', { static: false })
   set input(element: ElementRef<HTMLInputElement>) {
     if(element) {
@@ -64,6 +49,10 @@ export class ModalComponent implements OnInit {
       }
     })
   }
+  ngOnDestroy() {
+    this.modalService.getModal().unsubscribe()
+  }
+
   edit(value: boolean, content?: boolean) {
     if(!value) {
       this.storiesService.updatePost(this.titleEditText, this.contentEditText, this.story.id)

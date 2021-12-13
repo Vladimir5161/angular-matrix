@@ -7,13 +7,11 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   email: string = '';
   password: string = '';
   constructor(private apiAuthService: ApiAuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
   submitFormValues(event: any) {
     this.apiAuthService.login({email: event.email, password: event.password})
   }

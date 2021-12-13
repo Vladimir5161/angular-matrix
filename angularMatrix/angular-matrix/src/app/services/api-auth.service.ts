@@ -29,24 +29,18 @@ export class ApiAuthService {
   }
   requestResetPassword(email:string): Subscription {
     return this.http.post<string>(`${basicUrl}/requestPasswordReset?email=${email}`, { observe: 'response'}).subscribe(resp => {
-      if (resp) {
         this.alertService.showAlert('please check your email', false)
-      }
     })
   }
   resetPassword(email:string, password: string, repeatPassword: string): Subscription {
     const data = {email: email, password: password, repeatPassword: repeatPassword}
     return this.http.post<string>(`${basicUrl}/resetPassword`, data, { observe: 'response'}).subscribe(resp => {
-      if (resp) {
         this.alertService.showAlert('password changed, please try to login', false)
-      }
     })
   }
   register(data: Auth): Subscription  {
     return this.http.post<string>( `${basicUrl}/reqister`,  data, {observe: 'response'}).subscribe(resp => {
-      if (resp) {
         this.alertService.showAlert('account added', false)
-      }
     })
   }
   login(data: Auth): Subscription  {
